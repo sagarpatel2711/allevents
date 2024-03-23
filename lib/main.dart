@@ -1,3 +1,5 @@
+import 'package:allevents/Controller/apiController.dart';
+import 'package:allevents/Controller/homeController.dart';
 import 'package:allevents/Routes/pages.dart';
 import 'package:allevents/localization/localizationService.dart';
 import 'package:allevents/themes/themes.dart';
@@ -5,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
+  Get.put(HomeController());
+  Get.put(ApiController());
   runApp(const MyApp());
 }
 

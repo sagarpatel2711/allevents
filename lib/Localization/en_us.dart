@@ -1,1 +1,1 @@
-Map<String, String> enUS = {};
+Map<String, String> enUS = {"category": "Category"};

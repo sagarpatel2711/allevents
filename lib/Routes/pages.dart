@@ -1,3 +1,4 @@
+import 'package:allevents/View/eventDetails.dart';
 import 'package:get/get.dart';
 
 import '../View/homeView.dart';
@@ -10,5 +11,10 @@ class Pages {
         page: () => HomeView(),
         transition: Transition.leftToRight,
         transitionDuration: const Duration(milliseconds: 200)),
+    GetPage(
+        name: _Paths.EventDetailView,
+        page: () => EventDetailView(),
+        transition: Transition.leftToRight,
+        transitionDuration: const Duration(milliseconds: 200))
   ];
 }
