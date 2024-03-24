@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "593045633805",
+    "project_id": "allevents-2976d",
+    "storage_bucket": "allevents-2976d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593045633805:android:1d78ed4752d50a8c3d0e44",
+        "android_client_info": {
+          "package_name": "com.example.allevents"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVEx-PV148qyrRLuVQXTvx41ArVse2E5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

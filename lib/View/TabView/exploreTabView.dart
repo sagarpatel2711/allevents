@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../Widgets/shimmerEffect.dart';
+
+// ignore: must_be_immutable
 class ExploreTabView extends StatelessWidget {
   ExploreTabView({super.key});
   ApiController apiController = Get.put(ApiController());
@@ -80,12 +83,12 @@ class ExploreTabView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Icon(
-                        Icons.calendar_month,
-                        color: Colors.black,
+                        IconAssets.calenderIcon,
+                        color: AppColors.blackColor,
                       ),
                       Text(
-                        "Date&Time",
-                        style: TextStyle(color: Colors.black),
+                        "datetime".tr,
+                        style: Get.textTheme.labelMedium,
                       )
                     ],
                   ),
@@ -96,12 +99,12 @@ class ExploreTabView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Icon(
-                        Icons.sort_outlined,
-                        color: Colors.black,
+                        IconAssets.sortIcon,
+                        color: AppColors.blackColor,
                       ),
                       Text(
-                        "Sort",
-                        style: TextStyle(color: Colors.black),
+                        "sort".tr,
+                        style: Get.textTheme.labelMedium,
                       )
                     ],
                   ),
@@ -112,7 +115,30 @@ class ExploreTabView extends StatelessWidget {
           const SizedBox(height: 15),
           Obx(
             () => apiController.dataLoad.value
-                ? const CircularProgressIndicator()
+                ? Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: 20,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 3.0),
+                              child: ShimmerEffects.rectangle(
+                                height: 100,
+                                width: Get.width,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  )
                 : Expanded(
                     child: ListView.builder(
                     itemCount: apiController.categoryItem.length,
@@ -191,9 +217,9 @@ class ExploreTabView extends StatelessWidget {
                                                 children: [
                                                   for (int i = 0; i < 3; i++)
                                                     Container(
-                                                      margin:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 3),
+                                                      margin: const EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 3),
                                                       child: const Align(
                                                           widthFactor: 0.5,
                                                           child: CircleAvatar(
@@ -204,7 +230,6 @@ class ExploreTabView extends StatelessWidget {
                                                               radius: 8,
                                                               backgroundImage:
                                                                   NetworkImage(
-                                                                      // productDetails.,
                                                                       ""),
                                                             ),
                                                           )),
@@ -223,13 +248,13 @@ class ExploreTabView extends StatelessWidget {
                                                   }
                                                 },
                                                 icon: Icon(
-                                                  Icons.dry_cleaning_outlined,
+                                                  IconAssets.webIcon,
                                                   color: AppColors.blackColor,
                                                 )),
                                             IconButton(
                                                 onPressed: () {},
                                                 icon: Icon(
-                                                  Icons.star_border,
+                                                  IconAssets.starIcon,
                                                   color: AppColors.blackColor,
                                                 )),
                                           ],
@@ -256,7 +281,6 @@ class ExploreTabView extends StatelessWidget {
   ) {
     return showModalBottomSheet(
       context: _,
-      // isScrollControlled: true,
       builder: (context) {
         return Container(
           width: Get.width,
@@ -270,12 +294,13 @@ class ExploreTabView extends StatelessWidget {
             children: [
               ListTile(
                 title: Text(
-                  "Categories",
+                  "categories".tr,
                   style: Get.textTheme.titleLarge,
                 ),
                 titleAlignment: ListTileTitleAlignment.center,
                 trailing: IconButton(
-                    onPressed: () => Get.back(), icon: Icon(Icons.cancel)),
+                    onPressed: () => Get.back(),
+                    icon: Icon(IconAssets.cancleIcon)),
               ),
               const Divider(
                 color: AppColors.greyColor,

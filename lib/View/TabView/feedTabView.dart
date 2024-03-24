@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FeedTabView extends StatelessWidget {
   const FeedTabView({super.key});
@@ -7,8 +8,8 @@ class FeedTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        "Feed",
-        style: TextStyle(color: Colors.black),
+        "Comming soon",
+        style: Get.textTheme.titleLarge,
       ),
     );
   }

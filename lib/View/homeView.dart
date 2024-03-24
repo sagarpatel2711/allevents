@@ -1,5 +1,6 @@
 import 'package:allevents/Controller/apiController.dart';
 import 'package:allevents/Controller/homeController.dart';
+import 'package:allevents/Localization/iconAssets.dart';
 import 'package:allevents/View/TabView/exploreTabView.dart';
 import 'package:allevents/View/TabView/feedTabView.dart';
 import 'package:allevents/View/TabView/profileTabView.dart';
@@ -8,7 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../Themes/appColors.dart';
+import '../Widgets/searchDelegate.dart';
 
+// ignore: must_be_immutable
 class HomeView extends StatelessWidget {
   HomeView({super.key});
   ApiController apiController = Get.put(ApiController());
@@ -16,18 +19,19 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    homeController.getLocalData();
     return Obx(
       () => Scaffold(
         backgroundColor: Colors.grey.shade200,
         appBar: AppBar(
           backgroundColor: Colors.grey.shade100,
           title: Text(
-            "All Events",
+            "allevents".tr,
             style: Get.textTheme.titleMedium,
           ),
           actions: [
             IconButton(
-              icon: Icon(Icons.search),
+              icon: Icon(IconAssets.searchIcon),
               onPressed: () {
                 showSearch(context: context, delegate: SearchBarDelegate());
               },
@@ -36,7 +40,7 @@ class HomeView extends StatelessWidget {
         ),
         body: IndexedStack(
           index: homeController.selectedIndex.value,
-          children: [ExploreTabView(), FeedTabView(), ProfileTabView()],
+          children: [ExploreTabView(), const FeedTabView(), ProfileTabView()],
         ),
         bottomNavigationBar: Obx(() => _bottomBar()),
       ),
@@ -47,14 +51,14 @@ class HomeView extends StatelessWidget {
     if (homeController.selectedIndex.value == index) {
       return Colors.yellow;
     } else {
-      return Colors.red;
+      return AppColors.redColor;
     }
   }
 
   _bottomBar() {
     return Container(
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30), topRight: Radius.circular(30))),
       child: BottomNavigationBar(
@@ -76,78 +80,19 @@ class HomeView extends StatelessWidget {
         unselectedLabelStyle: const TextStyle(fontSize: 16),
         items: [
           BottomNavigationBarItem(
-              label: "Explore".tr,
-              icon: Icon(Icons.edit_document),
+              label: "explore".tr,
+              icon: Icon(IconAssets.editIcon),
               backgroundColor: isSelected(0)),
           BottomNavigationBarItem(
-              label: "Feed".tr,
-              icon: Icon(Icons.calendar_month),
+              label: "feed".tr,
+              icon: Icon(IconAssets.calenderIcon),
               backgroundColor: isSelected(1)),
           BottomNavigationBarItem(
-              label: "Profile".tr,
-              icon: const Icon(CupertinoIcons.person_alt_circle),
+              label: "profile".tr,
+              icon: Icon(IconAssets.personIcon),
               backgroundColor: isSelected(2)),
         ],
       ),
-    );
-  }
-}
-
-class SearchWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.search),
-      onPressed: () {
-        showSearch(context: context, delegate: SearchBarDelegate());
-      },
-    );
-  }
-}
-
-class SearchBarDelegate extends SearchDelegate<String> {
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-      ),
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.arrow_back),
-      onPressed: () {
-        close(context, '');
-      },
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    // Implement your search results here
-    return Center(
-      child: Text('Search Results for: $query'),
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    // Implement suggestions based on the query here
-    return ListView.builder(
-      itemBuilder: (context, index) => ListTile(
-        title: Text('Suggestion $index'),
-        onTap: () {
-          // Handle suggestion selection
-          showResults(context);
-        },
-      ),
-      itemCount: 5,
     );
   }
 }

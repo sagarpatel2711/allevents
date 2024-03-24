@@ -18,7 +18,6 @@ class ApiController extends GetxController {
         final response = await ApiManage.getCall(url: ApiString.categoryUrl);
         categoryResponceModal.value = List<CategoryRespnseModal>.from(
             response.map((json) => CategoryRespnseModal.fromJson(json)));
-        // categoriesDataResponseModal.item = [];
         categoryItem.value = [];
         await getCatDataApi(
             api: "https://allevents.s3.amazonaws.com/tests/all.json");
@@ -58,7 +57,6 @@ class ApiController extends GetxController {
   @override
   void onInit() {
     getCategoryApi();
-    // TODO: implement onInit
     super.onInit();
   }
 }
