@@ -26,16 +26,25 @@ class HomeView extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.grey.shade100,
           title: Text(
-            "allevents".tr,
+            homeController.selectedIndex.value == 0
+                ? "allevents".tr
+                : homeController.selectedIndex.value == 1
+                    ? "Feed"
+                    : homeController.selectedIndex.value == 2
+                        ? "Profile"
+                        : "",
             style: Get.textTheme.titleMedium,
           ),
           actions: [
-            IconButton(
-              icon: Icon(IconAssets.searchIcon),
-              onPressed: () {
-                showSearch(context: context, delegate: SearchBarDelegate());
-              },
-            )
+            homeController.selectedIndex.value == 0
+                ? IconButton(
+                    icon: Icon(IconAssets.searchIcon),
+                    onPressed: () {
+                      showSearch(
+                          context: context, delegate: SearchBarDelegate());
+                    },
+                  )
+                : const SizedBox()
           ],
         ),
         body: IndexedStack(

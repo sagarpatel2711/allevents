@@ -86,9 +86,12 @@ class ExploreTabView extends StatelessWidget {
                         IconAssets.calenderIcon,
                         color: AppColors.blackColor,
                       ),
-                      Text(
-                        "datetime".tr,
-                        style: Get.textTheme.labelMedium,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Text(
+                          "datetime".tr,
+                          style: Get.textTheme.labelMedium,
+                        ),
                       )
                     ],
                   ),
@@ -102,9 +105,12 @@ class ExploreTabView extends StatelessWidget {
                         IconAssets.sortIcon,
                         color: AppColors.blackColor,
                       ),
-                      Text(
-                        "sort".tr,
-                        style: Get.textTheme.labelMedium,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Text(
+                          "sort".tr,
+                          style: Get.textTheme.labelMedium,
+                        ),
                       )
                     ],
                   ),
